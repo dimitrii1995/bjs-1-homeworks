@@ -2,10 +2,15 @@ function compareArrays(arr1, arr2) {
     if (arr1.length !== arr2.length) {
       return false; 
     }
+    
     return arr1.every((value, index) => value === arr2[index]);
   }
   
-  
+  console.log(compareArrays([8, 9], [6])); 
+console.log(compareArrays([8, 9, 5, 4], [8, 9, 5, 4, 8, 3, 5])); 
+console.log(compareArrays([9, 2, 4, 8, 2], [9, 2, 4])); 
+console.log(compareArrays([1, 2, 3], [2, 3, 1])); 
+console.log(compareArrays([8, 1, 2], [8, 1, 2]));
   
   
   function getUsersNamesInAgeRange(users, gender) {
@@ -14,6 +19,7 @@ function compareArrays(arr1, arr2) {
     if (filteredUsers.length === 0) {
       return 0; 
     }
+
     const totalAge = filteredUsers.reduce((sum, user) => sum + user.age, 0);
     const averageAge = totalAge / filteredUsers.length;
   
@@ -37,9 +43,9 @@ function compareArrays(arr1, arr2) {
     {firstName: "Евгений", secondName: "Кузьмин", age: 19, gender: "мужской"},
   ];
   
-  console.log(getUsersNamesInAgeRange(people, "мужской")); // 32
-  console.log(getUsersNamesInAgeRange(people, "женский")); // 27.4
-  console.log(getUsersNamesInAgeRange([], "женский")); // 0
-  console.log(getUsersNamesInAgeRange(people, "инопланетянин")); // 0
+  console.log(getUsersNamesInAgeRange(people, "мужской")); 
+  console.log(getUsersNamesInAgeRange(people, "женский"));
+  console.log(getUsersNamesInAgeRange([], "женский"));
+  console.log(getUsersNamesInAgeRange(people, "инопланетянин")); 
   
   
