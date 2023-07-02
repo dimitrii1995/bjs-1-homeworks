@@ -31,43 +31,21 @@ function cachingDecoratorNew(func) {
 //Задача № 2
 function debounceDecoratorNew(func, delay) {
 	let timeoutId = null;
-	let count = 0;
-	let allCount = 0;
-
-	function decoratFunction(...args) {
-	if (timeoutId) {
-			clearTimeout(timeoutId);
-			timeoutId = null;
-		}
-
-	if (count === 0) {
-		console.log(func(...args));
-		count++;
-		allCount++;
-		} else {
-		allCount++;
-		}
-
-	timeoutId = setTimeout(() => {
-		timeoutId = null;
-		console.log(func(...args));
-		count++;
-		}, delay);
+	function wrapper(...args) {
+	  wrapper.allCount++;
+	  if (!timeoutId){
+		  func(...args);
+		  wrapper.count++; 
+	  }
+	  if (timeoutId) {
+		  clearTimeout(timeoutId);
+	  }
+	  timeoutId = setTimeout(() => {
+		  func(...args);
+		  wrapper.count++;
+	  }, delay)
 	}
-
-	Object.defineProperty(decoratFunction, "count", {
-		get: function() {
-		return count;
-		},
-	});
-
-	Object.defineProperty(decoratFunction, "allCount", {
-		get: function() {
-		return allCount;
-		},
-	});
-
-	decoratFunction.history = [];
-
-	return decoratFunction;
-}
+	wrapper.count = 0;
+	wrapper.allCount = 0;  
+	return wrapper;
+  }
